@@ -26,37 +26,27 @@ public class MainActivity extends ActionBarActivity {
 
     }
 
+    private  Socket mSocket;
+
     private void connect () {
         try {
             mSocket = IO.socket("http://106.187.51.112:3000");
-            //mSocket = IO.so
             mSocket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
                 }
-
             }).on("foo", new Emitter.Listener() {
-
                 @Override
                 public void call(Object... args) {
                     Log.d("SOCKET.IO","received message");
                 }
-
             }).on(Socket.EVENT_DISCONNECT, new Emitter.Listener() {
-
                 @Override
                 public void call(Object... args) {}
-
             });
-            if (mSocket != null) {
 
-                Log.d("SOCKET.IO","into sss");
-
-            }
             mSocket.connect();
             mSocket.emit("reg", "112");
-            //mSocket.disconnect();
-            Log.d("SOCKET.IO","into connection");
 
         } catch (Exception e) {
             Log.d("SOCKET.IO", "This shit did not work!!!");
